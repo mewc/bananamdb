@@ -4,7 +4,7 @@ export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';
 export const FETCH_MOVIES_NO_RESULTS = 'FETCH_MOVIES_NO_RESULTS';
 
 
-const apiEndpoint = "http://www.omdbapi.com/?s="
+const apiEndpoint = "https://www.omdbapi.com/?s="
 const apiKeyToAppend = "&apikey=cb065dd4";
 export function fetchMovies(titleQuery){
   let fullEndpoint = apiEndpoint + titleQuery + apiKeyToAppend;
