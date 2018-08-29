@@ -5,6 +5,18 @@ import { connect } from 'react-redux';
 
 import {userActionTest} from '../actions/actions.js';
 
+import TopBar from './TopBar.js';
+import MovieGrid from './MovieGrid.js';
+import Search from './Search.js';
+
+import MTP from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import theme from 'material-ui/styles/baseThemes/lightBaseTheme';
+
+
+
+
+
 class App extends Component {
 
   constructor(props){
@@ -17,13 +29,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-
-          <h1 className="App-title">Welcome to bananamdb</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <MTP muiTheme={getMuiTheme(theme)}>
+          <div >
+            <TopBar />
+            
+            <Search />
+            <MovieGrid />
+          </div>
+        </MTP>
       </div>
     );
   }
