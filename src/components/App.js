@@ -32,7 +32,6 @@ class App extends Component {
         <MTP muiTheme={getMuiTheme(theme)}>
           <div >
             <TopBar />
-
             <Search />
             <MovieGrid />
           </div>

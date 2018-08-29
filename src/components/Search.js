@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import SearchIcon from 'material-ui/svg-icons/action/search';
-import Snackbar from 'material-ui/Snackbar';
+import CircularProgress from 'material-ui/CircularProgress';
 
 
 import { connect } from 'react-redux';
@@ -26,35 +26,15 @@ class Search extends React.Component{
       errorText: '',
       searchValue: '',
       searchDisabled: true,
-      snackbar: {
-        isOpen: false,
-        message: '',
-      }
-    }
-  }
 
-  handleSnackbarTrigger = (error) => {
-      let message = 'Search error - ' + error.message;
-      this.setState({
-        snackbar:{
-          isOpen: true,
-          message: message,
-        }
-      });
+    }
   }
 
   handleSearchClick = () => {
     this.props.dispatch(fetchMovies(this.state.searchValue))
   }
 
-  handleRequestClose = () => {
-    this.setState({
-      snackbar:{
-        isOpen: false,
-        message: '',
-      }
-    });
-  };
+
 
   onInputChange(event) {
       if (event.target.value.length >= 2) {
@@ -65,14 +45,15 @@ class Search extends React.Component{
   }
 
   render(){
-    const {loading, error} = this.props;
 
-    if(error){
-      return this.handleSnackbarTrigger(error);
+    let loadingSearchButton = <IconButton disabled={this.state.searchDisabled}>
+        <SearchIcon onClick={this.handleSearchClick}/>
+    </IconButton>;
+
+    if(this.props.loading){
+      loadingSearchButton = <CircularProgress thickness={3}/>
     }
-    if(loading){
-      return <div>Loading</div> //TODO update to real loading thing
-    }
+
     return (
 
     <div>
@@ -86,16 +67,9 @@ class Search extends React.Component{
             errorText={this.state.errorText}
             onChange={this.onInputChange.bind(this)}
         />
-        <IconButton disabled={this.state.searchDisabled}>
-            <SearchIcon onClick={this.handleSearchClick}/>
-        </IconButton>
+        {loadingSearchButton}
       </div>
-      <Snackbar
-          open={this.state.snackbar.isOpen}
-          message={this.state.snackbar.message}
-          autoHideDuration={4000}
-          onRequestClose={this.handleRequestClose}
-        />
+
     </div>
     )
   }

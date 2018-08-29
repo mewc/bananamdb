@@ -1,6 +1,8 @@
 import {FETCH_MOVIES_BEGIN,
    FETCH_MOVIES_FAILURE,
-    FETCH_MOVIES_SUCCESS} from '../actions/actions.js';
+    FETCH_MOVIES_SUCCESS,
+  FETCH_MOVIES_NO_RESULTS} from '../actions/actions.js';
+
 
 let defaultState = {
   user: {
@@ -58,7 +60,6 @@ let defaultState = {
   movies: [],
   loading: false,
   error: null,
-
   
 };
 
@@ -87,7 +88,13 @@ export default function movieReducer(state = defaultState, action){
       ...state,
       loading: false,
       error: action.payload.error,
-      movies: []
+    };
+    case FETCH_MOVIES_NO_RESULTS:
+      //WHEN A SEARCH QUERY RETURNS NOTHING eg. asdflvbalhvbsad
+    return {
+      ...state,
+      loading: false,
+      error: action.payload.error,
     };
     default:
     return state;
