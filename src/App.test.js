@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import {fetchMovies} from '../actions/actions.js';
+import {fetchMovies} from 'actions/actions.js';
 
 
 it('renders without crashing', () => {
