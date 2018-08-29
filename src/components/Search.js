@@ -11,7 +11,8 @@ const styles = {
   }
 };
 
-const searchRegex = "^\w{2,}$";
+// const searchRegex = "^\w{2,}$";
+
 
 class Search extends React.Component{
   constructor(props){
@@ -27,7 +28,13 @@ class Search extends React.Component{
     }
   }
 
-  handleSearchClick = (message) => {
+
+
+  handleSearchClick = () => {
+
+  // this.props.dispatch(fetchMovies(this.state.searchValue))
+
+    let message = 'Error found in searching';
     this.setState({
       snackbar:{
         isOpen: true,
@@ -47,9 +54,9 @@ class Search extends React.Component{
 
   onInputChange(event) {
       if (event.target.value.length >= 2) {
-        this.setState({ errorText: '', searchDisabled: false});
+        this.setState({ errorText: '', searchDisabled: false, searchValue: event.target.value});
       } else {
-        this.setState({ errorText: 'Search must be 2 or more characters', searchDisabled: true});
+        this.setState({ errorText: 'Search must be 2 or more characters', searchDisabled: true, searchValue: event.target.value});
       }
   }
 
@@ -68,7 +75,7 @@ class Search extends React.Component{
             onChange={this.onInputChange.bind(this)}
         />
         <IconButton disabled={this.state.searchDisabled}>
-            <SearchIcon onClick={() => this.handleSearchClick('Error in searching')}/>
+            <SearchIcon onClick={this.handleSearchClick}/>
         </IconButton>
       </div>
       <Snackbar

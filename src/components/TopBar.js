@@ -3,7 +3,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import {userActionTest} from '../actions/actions.js';
+import {fetchMovies} from '../actions/actions.js';
 
 import { AppBar } from 'material-ui';
 
@@ -33,7 +33,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({userActionTest}, dispatch);
+  return bindActionCreators({fetchMovies}, dispatch);
 }
 
 

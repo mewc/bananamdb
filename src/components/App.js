@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import {userActionTest} from '../actions/actions.js';
+import {fetchMovies} from '../actions/actions.js';
 
 import TopBar from './TopBar.js';
 import MovieGrid from './MovieGrid.js';
@@ -32,7 +32,7 @@ class App extends Component {
         <MTP muiTheme={getMuiTheme(theme)}>
           <div >
             <TopBar />
-            
+
             <Search />
             <MovieGrid />
           </div>
@@ -49,7 +49,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({userActionTest}, dispatch);
+  return bindActionCreators({fetchMovies}, dispatch);
 }
 
 

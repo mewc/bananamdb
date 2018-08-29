@@ -3,11 +3,10 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import {userActionTest} from '../actions/actions.js';
+import {fetchMovies} from '../actions/actions.js';
 
 import { GridList, GridTile } from 'material-ui';
 import IconButton from 'material-ui/IconButton';
-import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 
@@ -24,59 +23,15 @@ const styles = {
   },
 };
 
-const tilesData = [
-  {
-    poster: 'images/grid-list/00-52-29-429_640.jpg',
-    title: 'test',
-    year: '1999',
-  },
-  {
-    poster: 'images/grid-list/00-52-29-429_640.jpg',
-    title: 'test',
-    year: '1999',
-  },
-  {
-    poster: 'images/grid-list/00-52-29-429_640.jpg',
-    title: 'test',
-    year: '1999',
-  },
-  {
-    poster: 'images/grid-list/00-52-29-429_640.jpg',
-    title: 'test',
-    year: '1999',
-  },
-  {
-    poster: 'images/grid-list/00-52-29-429_640.jpg',
-    title: 'test',
-    year: '1999',
-  },
-  {
-    poster: 'images/grid-list/00-52-29-429_640.jpg',
-    title: 'test',
-    year: '1999',
-  },
-  {
-    poster: 'images/grid-list/00-52-29-429_640.jpg',
-    title: 'test',
-    year: '1999',
-  },
-  {
-    poster: 'images/grid-list/00-52-29-429_640.jpg',
-    title: 'test',
-    year: '1999',
-  },
-  {
-    poster: 'images/grid-list/00-52-29-429_640.jpg',
-    title: 'test',
-    year: '1999',
-  },
 
-];
+
 
 class MovieGrid extends React.Component {
 
 
-
+  componentDidMount(){
+    this.props.dispatch(fetchMovies("test"))
+  }
 
   constructor(props){
     super(props);
@@ -86,21 +41,31 @@ class MovieGrid extends React.Component {
   }
 
   render() {
+
+    const {movies, loading, error} = this.props;
+
+    if(error){
+      return <div>Error {error.message}</div>
+    }
+    if(loading){
+      return <div>Loading</div>
+    }
+    console.log(this.props.movies);
+
     return (
       <div style={styles.root}>
             <GridList
                  cellHeight={180}
                  style={styles.gridList}
                >
-             <Subheader>December</Subheader>
-             {tilesData.map((tile) => (
+             {this.props.movies.map((item, index) => (
                <GridTile
-                 key={tile}
-                 title={tile.title}
-                 subtitle={<span>by <b>{tile.year}</b></span>}
+                 key={index}
+                 title={item.Title}
+                 subtitle={<span>by <b>{item.Year}</b></span>}
                  actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
                >
-                 <img src={tile.poster} />
+                 <img src={item.Poster} alt={item.Title + ' movie poster'}/>
                </GridTile>
              ))}
            </GridList>
@@ -110,14 +75,13 @@ class MovieGrid extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
-    user: state.user
+    testMovies: state.testMovies,
+    movies: state.movies,
+    loading: state.loading,
+    error: state.error,
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({userActionTest}, dispatch);
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps) (MovieGrid);
+export default connect(mapStateToProps) (MovieGrid);

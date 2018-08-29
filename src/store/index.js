@@ -1,12 +1,10 @@
-import React from 'react';
-import {createStore, combineReducers } from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import devToolsEnhancer from 'remote-redux-devtools';
+import movieReducer from '../reducers/movieReducer.js';
+import thunk from 'redux-thunk';
 
-import * as reducers from '../reducers/reducers';
 
 export const store = createStore(
-  combineReducers({
-    state: reducers
-  }),
-  devToolsEnhancer()
-);
+  movieReducer,
+   devToolsEnhancer(), applyMiddleware(thunk)
+ );
