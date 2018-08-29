@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import {fetchMovies} from '../actions/actions.js';
@@ -50,7 +49,7 @@ class MovieGrid extends React.Component {
     if(loading){
       return <div>Loading</div>
     }
-    console.log(this.props.movies);
+    console.log(movies);
 
     return (
       <div style={styles.root}>
@@ -58,7 +57,7 @@ class MovieGrid extends React.Component {
                  cellHeight={180}
                  style={styles.gridList}
                >
-             {this.props.movies.map((item, index) => (
+             {movies.map((item, index) => (
                <GridTile
                  key={index}
                  title={item.Title}
