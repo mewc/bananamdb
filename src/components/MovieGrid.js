@@ -2,8 +2,6 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
-import {fetchMovies} from '../actions/actions.js';
-
 import { GridList, GridTile } from 'material-ui';
 import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
@@ -29,7 +27,7 @@ class MovieGrid extends React.Component {
 
 
   componentDidMount(){
-    this.props.dispatch(fetchMovies("test"))
+    // this.props.dispatch(fetchMovies("test"))
   }
 
   constructor(props){
@@ -44,10 +42,10 @@ class MovieGrid extends React.Component {
     const {movies, loading, error} = this.props;
 
     if(error){
-      return <div>Error {error.message}</div>
+      return <div>Error {error.message}</div> //Trigger snackbar
     }
     if(loading){
-      return <div>Loading</div>
+      return <div>Loading</div> //TODO update to real loading thing
     }
     console.log(movies);
 

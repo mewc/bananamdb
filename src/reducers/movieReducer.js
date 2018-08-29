@@ -59,6 +59,7 @@ let defaultState = {
   loading: false,
   error: null,
 
+  
 };
 
 export default function movieReducer(state = defaultState, action){

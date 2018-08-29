@@ -1,7 +1,5 @@
 import React from 'react';
 
-import {fetchMovies} from '../actions/actions.js';
-
 import { AppBar } from 'material-ui';
 
 class TopBar extends React.Component {

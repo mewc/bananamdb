@@ -4,6 +4,11 @@ import IconButton from 'material-ui/IconButton';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import Snackbar from 'material-ui/Snackbar';
 
+
+import { connect } from 'react-redux';
+import {fetchMovies} from '../actions/actions.js';
+
+
 const styles = {
   root: {
     display: 'flex',
@@ -28,19 +33,18 @@ class Search extends React.Component{
     }
   }
 
-
+  handleSnackbarTrigger = (error) => {
+      let message = 'Search error - ' + error.message;
+      this.setState({
+        snackbar:{
+          isOpen: true,
+          message: message,
+        }
+      });
+  }
 
   handleSearchClick = () => {
-
-  // this.props.dispatch(fetchMovies(this.state.searchValue))
-
-    let message = 'Error found in searching';
-    this.setState({
-      snackbar:{
-        isOpen: true,
-        message: message,
-      }
-    });
+    this.props.dispatch(fetchMovies(this.state.searchValue))
   }
 
   handleRequestClose = () => {
@@ -61,6 +65,14 @@ class Search extends React.Component{
   }
 
   render(){
+    const {loading, error} = this.props;
+
+    if(error){
+      return this.handleSnackbarTrigger(error);
+    }
+    if(loading){
+      return <div>Loading</div> //TODO update to real loading thing
+    }
     return (
 
     <div>
@@ -89,4 +101,12 @@ class Search extends React.Component{
   }
 }
 
-export default Search;
+const mapStateToProps = (state) => {
+  return {
+
+    loading: state.loading,
+    error: state.error,
+  }
+}
+
+export default connect(mapStateToProps) (Search);
