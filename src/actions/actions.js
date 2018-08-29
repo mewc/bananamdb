@@ -16,14 +16,20 @@ export function fetchMovies(titleQuery){
     .then(handleErrors)
     .then(res => res.json())
     .then(json => {
-        if(Object.keys(json).length > 0){
-          console.log('no results');
-          dispatch(fetchMoviesNoResults);
+      // console.log(json);
+        if(json.Response === "False"){
+          dispatch(fetchMoviesNoResults());
+          dispatch(showNotification(json.Error));
+          return false;
         }
       dispatch(fetchMoviesSuccess(json));
       return json;
     })
-    .catch(error => dispatch(fetchMoviesFailure))
+    .catch(error => {
+      dispatch(fetchMoviesFailure);
+      dispatch(showNotification(error.message));
+    }
+    )
   }
 }
 
@@ -63,8 +69,9 @@ export function showNotification(message){
 };
 
 export function hideNotification(){
+  let message = false;
   return {
     type: NOTIFICATION,
-    payload: {message: false}
+    payload: {message}
   };
 };

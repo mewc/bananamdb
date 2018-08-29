@@ -6,7 +6,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 
 
 import { connect } from 'react-redux';
-import {fetchMovies, showNotification} from '../actions/actions.js';
+import {fetchMovies} from '../actions/actions.js';
 
 
 const styles = {
@@ -32,7 +32,6 @@ class Search extends React.Component{
 
   handleSearchClick = () => {
     this.props.dispatch(fetchMovies(this.state.searchValue));
-    this.props.dispatch(showNotification('this works'));
   }
 
 

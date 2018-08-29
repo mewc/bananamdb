@@ -47,7 +47,12 @@ class MovieGrid extends React.Component {
                  title={item.Title}
                  subtitle={<span>by <b>{item.Year}</b></span>}
                >
-                 <img src={item.Poster} alt={item.Title + ' movie poster'}/>
+                 <img src={item.Poster}
+                  alt={item.Title + ' movie poster'}
+                  onError={(e) => {
+                    e.target.src="../notfound.png"
+                  }}
+                  />
                </GridTile>
              ))
              :<div></div>
@@ -60,7 +65,6 @@ class MovieGrid extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     testMovies: state.testMovies,
     movies: state.movies,

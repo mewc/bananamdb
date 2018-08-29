@@ -24,9 +24,8 @@ class ErrorSnackbar extends React.Component{
 
 
   render(){
-    console.log(this.props.notification);
     return <Snackbar
-        open={this.props.notification}
+        open={(this.props.notification)?true:false}
         message={this.props.notification}
         autoHideDuration={4000}
         onRequestClose={this.handleRequestClose}
