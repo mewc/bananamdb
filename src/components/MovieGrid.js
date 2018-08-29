@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { GridList, GridTile } from 'material-ui';
 import ErrorSnackbar from './ErrorSnackbar';
+import ImgPlaceholder from '../notfound.png';
 
 const styles = {
   root: {
@@ -49,9 +50,7 @@ class MovieGrid extends React.Component {
                >
                  <img src={item.Poster}
                   alt={item.Title + ' movie poster'}
-                  onError={(e) => {
-                    e.target.src="../notfound.png"
-                  }}
+                  onError={i => i.target.src=ImgPlaceholder}
                   />
                </GridTile>
              ))

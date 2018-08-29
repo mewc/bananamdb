@@ -11,7 +11,7 @@ import Search from './Search.js';
 
 import MTP from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import theme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import theme from '../bananamdbMuiTheme.js';
 
 
 

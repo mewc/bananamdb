@@ -58,7 +58,7 @@ class Search extends React.Component{
 
     <div>
       <div style={styles.root}>
-        <h1>BANANAMDB MOVIE SEARCHER</h1>
+        <h4>BANANAMDB MOVIE SEARCHER</h4>
       </div>
       <div style={styles.root}>
         <TextField
@@ -66,6 +66,7 @@ class Search extends React.Component{
             floatingLabelText="Search for a movie"
             errorText={this.state.errorText}
             onChange={this.onInputChange.bind(this)}
+            
         />
         {loadingSearchButton}
       </div>
