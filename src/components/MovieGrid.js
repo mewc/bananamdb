@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { GridList, GridTile } from 'material-ui';
+import ErrorSnackbar from './ErrorSnackbar';
 
 const styles = {
   root: {
@@ -33,17 +34,14 @@ class MovieGrid extends React.Component {
   }
 
   render() {
-
-    const {movies} = this.props;
-
     return (
       <div style={styles.root}>
             <GridList
                  cellHeight={180}
                  style={styles.gridList}
                >
-             {(movies !== undefined)?
-               movies.map((item, index) => (
+             {(this.props.movies !== undefined)?
+               this.props.movies.map((item, index) => (
                <GridTile
                  key={index}
                  title={item.Title}
@@ -55,6 +53,7 @@ class MovieGrid extends React.Component {
              :<div></div>
             }
            </GridList>
+           <ErrorSnackbar/>
        </div>
     );
   }

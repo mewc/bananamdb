@@ -52,3 +52,19 @@ export const fetchMoviesFailure = error => ({
   type: FETCH_MOVIES_FAILURE,
   payload: {error}
 });
+
+export const NOTIFICATION = 'NOTIFICATION';
+
+export function showNotification(message){
+  return {
+    type: NOTIFICATION,
+    payload: {message}
+  };
+};
+
+export function hideNotification(){
+  return {
+    type: NOTIFICATION,
+    payload: {message: false}
+  };
+};

@@ -2,7 +2,7 @@ import {FETCH_MOVIES_BEGIN,
    FETCH_MOVIES_FAILURE,
     FETCH_MOVIES_SUCCESS,
   FETCH_MOVIES_NO_RESULTS} from '../actions/actions.js';
-
+import {NOTIFICATION} from '../actions/actions.js';
 
 let defaultState = {
   user: {
@@ -60,7 +60,7 @@ let defaultState = {
   movies: [],
   loading: false,
   error: null,
-  
+  notification: false
 };
 
 export default function movieReducer(state = defaultState, action){
@@ -96,6 +96,11 @@ export default function movieReducer(state = defaultState, action){
       loading: false,
       error: action.payload.error,
     };
+    case NOTIFICATION:
+    return {
+      ...state,
+      notification: action.payload.message,
+    }
     default:
     return state;
   }
