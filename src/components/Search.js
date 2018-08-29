@@ -1,6 +1,8 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
-
+import IconButton from 'material-ui/IconButton';
+import SearchIcon from 'material-ui/svg-icons/action/search';
+import Snackbar from 'material-ui/Snackbar';
 
 const styles = {
   root: {
@@ -8,18 +10,76 @@ const styles = {
     justifyContent: 'center'
   }
 };
-export const Search = () => (
-  <div>
-  <div style={styles.root}>
-    <h1>BANANAMDB MOVIE SEARCHER</h1>
-  </div>
-  <div style={styles.root}>
-    <TextField
-        hintText="eg. Sharknado, The Room"
-        floatingLabelText="Search for a movie"
-    />
-  </div>
-  </div>
-);
+
+const searchRegex = "^\w{2,}$";
+
+class Search extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      errorText: '',
+      searchValue: '',
+      searchDisabled: true,
+      snackbar: {
+        isOpen: false,
+        message: '',
+      }
+    }
+  }
+
+  handleSearchClick = (message) => {
+    this.setState({
+      snackbar:{
+        isOpen: true,
+        message: message,
+      }
+    });
+  }
+
+  handleRequestClose = () => {
+    this.setState({
+      snackbar:{
+        isOpen: false,
+        message: '',
+      }
+    });
+  };
+
+  onInputChange(event) {
+      if (event.target.value.length >= 2) {
+        this.setState({ errorText: '', searchDisabled: false});
+      } else {
+        this.setState({ errorText: 'Search must be 2 or more characters', searchDisabled: true});
+      }
+  }
+
+  render(){
+    return (
+
+    <div>
+      <div style={styles.root}>
+        <h1>BANANAMDB MOVIE SEARCHER</h1>
+      </div>
+      <div style={styles.root}>
+        <TextField
+            hintText="eg. Sharknado, The Room"
+            floatingLabelText="Search for a movie"
+            errorText={this.state.errorText}
+            onChange={this.onInputChange.bind(this)}
+        />
+        <IconButton disabled={this.state.searchDisabled}>
+            <SearchIcon onClick={() => this.handleSearchClick('Error in searching')}/>
+        </IconButton>
+      </div>
+      <Snackbar
+          open={this.state.snackbar.isOpen}
+          message={this.state.snackbar.message}
+          autoHideDuration={4000}
+          onRequestClose={this.handleRequestClose}
+        />
+    </div>
+    )
+  }
+}
 
 export default Search;
