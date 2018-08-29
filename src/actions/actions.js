@@ -11,7 +11,7 @@ export function fetchMovies(titleQuery){
 
   return dispatch => {
     dispatch(fetchMoviesBegin());
-    console.log(fullEndpoint);
+    // console.log(fullEndpoint);
     return fetch(fullEndpoint)
     .then(handleErrors)
     .then(res => res.json())
